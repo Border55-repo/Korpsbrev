@@ -32,7 +32,7 @@ Forhåndsvisningen viser innholdet fortløpende. Den nedlastede PDF-en har den e
 
 ## Oppdateringer
 
-Standardkilden er `Border55-repo/Korpsbrev`. Dette prosjektet må opprettes og være offentlig før automatisk sjekk uten innlogging fungerer. Tilkoblingen til prosjektet er ikke bekreftet før opplasting er fullført.
+Standardkilden er det offentlige prosjektet `Border55-repo/Korpsbrev`. Det gjør at oppdateringssjekken fungerer uten innlogging.
 
 Appen leser `version.json` fra GitHub. Hvis versjonsnummeret er høyere, vises **Last ned versjon …**. Programfilens SHA-256 kontrolleres før nedlasting. Ingen GitHub-passord eller tilgangsnøkler ligger i programmet.
 
