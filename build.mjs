@@ -9,7 +9,7 @@ const scripts=[...previous.matchAll(/<script>([\s\S]*?)<\/script>/g)];
 if(scripts.length!==4)throw Error('Fant ikke de fire innebygde skriptene.');
 const fonts=previous.match(/const KORPS_FONT_DATA=(\{[^\n]+\});/)[1];
 const logo=previous.match(/const DEFAULT_LOGO='([^']+)';/)[1];
-const updater=read('src/updater.js');
+const updater=read('src/updater.js')+'\n'+read('src/status-check.js');
 const version=updater.match(/const APP_VERSION='(\d+\.\d+\.\d+)'/)[1];
 const notices=read('THIRD-PARTY-NOTICES.txt');
 let html=read('src/shell.html').replace(/1\.0\.0/g,version)
