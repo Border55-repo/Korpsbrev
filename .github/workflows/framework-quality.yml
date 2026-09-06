@@ -1,0 +1,29 @@
+name: Framework-kontroll
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Bygg programfilen
+        run: node build.mjs
+      - name: Kontroller at genererte filer er oppdatert
+        run: git diff --exit-code -- Korpsbrev.html version.json
+      - name: Kontroller versjon og JavaScript
+        run: |
+          node -e "const v=require('./version.json').version;if(!/^\\d+\\.\\d+\\.\\d+$/.test(v))process.exit(1)"
+          node --check build.mjs
+          node --check src/pdf-engine.js
+          node --check src/updater.js
