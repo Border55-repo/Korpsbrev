@@ -6,15 +6,17 @@ const root=path.dirname(fileURLToPath(import.meta.url));
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const previous=read('Korpsbrev.html');
 const scripts=[...previous.matchAll(/<script>([\s\S]*?)<\/script>/g)];
-if(scripts.length!==4)throw Error('Fant ikke de fire innebygde skriptene.');
+if(scripts.length<4)throw Error('Fant ikke de fire innebygde skriptene.');
+const embeddedScripts=scripts.slice(-4);
 const fonts=previous.match(/const KORPS_FONT_DATA=(\{[^\n]+\});/)[1];
 const logo=previous.match(/const DEFAULT_LOGO='([^']+)';/)[1];
 const updater=read('src/updater.js')+'\n'+read('src/status-check.js');
 const version=updater.match(/const APP_VERSION='(\d+\.\d+\.\d+)'/)[1];
 const notices=read('THIRD-PARTY-NOTICES.txt');
 let html=read('src/shell.html').replace(/1\.0\.0/g,version)
- .replace('<!-- PDFLIB -->',()=>'<script>'+scripts[0][1]+'</script>')
- .replace('<!-- FONTKIT -->',()=>'<script>'+scripts[1][1]+'</script>')
+ .replace('/* MAINTENANCE */',()=>read('src/maintenance-mode.js'))
+ .replace('<!-- PDFLIB -->',()=>'<script>'+embeddedScripts[0][1]+'</script>')
+ .replace('<!-- FONTKIT -->',()=>'<script>'+embeddedScripts[1][1]+'</script>')
  .replace('/* PDFENGINE */',()=>read('src/pdf-engine.js'))
  .replace('/* UPDATER */',()=>updater)
  .replace('__FONTS__',()=>fonts).replace('__LOGO__',()=>logo)
