@@ -1,4 +1,4 @@
-const APP_VERSION='1.1.0';
+const APP_VERSION='1.1.1';
 const DEFAULT_REPOSITORY='Border55-repo/Korpsbrev';
 let latestUpdate=null,updateBusy=false;
 function repository(){const v=el('update-repo').value.trim().replace(/^https:\/\/github.com\//,'').replace(/\/$/,'');return /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(v)?v:null;}

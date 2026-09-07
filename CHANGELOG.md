@@ -4,7 +4,7 @@ Alle vesentlige endringer i Korpsbrev dokumenteres her.
 
 ## [Uutgitt]
 
-- Ingen endringer registrert ennå.
+- Koblet verktøyet til kontrollpanelets sentrale vedlikeholdsmodus med automatisk utløp og sikker fail-open.
 
 ## [1.0.0]
 
